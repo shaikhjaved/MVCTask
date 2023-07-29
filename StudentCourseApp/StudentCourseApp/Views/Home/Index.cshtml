@@ -1,0 +1,67 @@
+﻿@model AccountViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <h1 id="title">Student Course App</h1>
+            <p class="lead">Explore the future of active learning.</p>
+            <p><a id="reg" href="javascript:void(0);" class="btn btn-outline-primary">Register Now &raquo;</a></p>
+        </div>
+        <div class="col">
+
+            @*<form autocomplete="off" id="login-form" action="@Url.Action("OnPostLogin", "Account")" class="p-4 p-md-5 border rounded-0 bg-white shadow-sm" style="height: 26rem;">*@
+            <form autocomplete="off" id="login-form" method="post" enctype="multipart/form-data" asp-controller="Account" asp-action="OnPostLogin" class="p-4 p-md-5 border rounded-0 bg-white shadow-sm" style="height: 26rem;">
+                <h5>Login</h5>
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" id="floatingUserId" name="UserId" placeholder="UserId (eg: Jon Doe)">
+                    <label for="floatingUserId">UserId</label>
+                </div>
+                <div class="form-floating mb-2">
+                    <input type="password" class="form-control" id="floatingUserPassword" name="UserPassword" placeholder="Password">
+                    <label for="floatingUserPassword">Password</label>
+                </div>
+                <button class="btn btn-primary" type="submit" style="font-weight:600; width:290px;height:auto;">submit</button>
+            </form>
+
+            <form id="reg-form" class="p-4 p-md-5 border rounded-0 bg-white shadow-sm" style="height: 26rem;">
+                <h5>Register</h5>
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" id="floatingFullname" placeholder="Fullname (eg: Jon)">
+                    <label for="floatingFullname">Firstname</label>
+                </div>
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" id="floatingLastname" placeholder="Lastname (eg: Doe)">
+                    <label for="floatingLastname">Lastname</label>
+                </div>
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" id="floatingEmail" placeholder="Email (eg: jone.doe@email.com)">
+                    <label for="floatingEmail">Email</label>
+                </div>
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" id="floatingMobile" placeholder="Mobile (eg: 9876543211)">
+                    <label for="floatingMobile">Mobile</label>
+                </div>
+                <button class="btn btn-primary btn-submit" type="submit" style="font-weight:600; width:280px;height:auto;">submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $("#login-form").hide();
+        $("#login").click(function () {
+            $("#reg-form").hide();
+            $("#login-form").show();
+        });
+        $("#reg-form").hide();
+        $("#reg").click(function () {
+            $("#login-form").hide();
+            $("#reg-form").show();
+        });
+    </script>
+}

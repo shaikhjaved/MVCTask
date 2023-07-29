@@ -1,0 +1,50 @@
+﻿@using System.Security.Claims
+@using Microsoft.AspNetCore.Identity
+
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow-sm mb-3">
+    <div class="container-fluid">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Student Course App</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            @if (User.Identity?.IsAuthenticated == true)
+            {
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Index">Students</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Courses" asp-action="Index">Courses</a>
+                    </li>
+                </ul>
+            }
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link text-secondary" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            USR @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item text-dark" href="#">Action</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form method="post" asp-controller="Account" asp-action="SignOutUser" asp-route-username="@User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value">
+                                    <a class="dropdown-item text-dark logout-button" href="javascript:void(0)">Logout</a>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a id="login" href="javascript:void(0);" class="nav-link text-dark">Login</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</nav>
